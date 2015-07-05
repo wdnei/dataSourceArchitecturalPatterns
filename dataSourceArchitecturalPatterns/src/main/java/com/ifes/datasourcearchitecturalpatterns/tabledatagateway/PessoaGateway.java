@@ -41,7 +41,7 @@ public class PessoaGateway {
         try {
 //Remove e cria a tabela a cada execução. Mero exemplo
             this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
-            this.stm.executeUpdate("CREATE TABLE pessoas ("
+            this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "nome varchar(70) PRIMARY KEY NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {
@@ -69,25 +69,18 @@ public class PessoaGateway {
         }
     }
 
-    public Vector getAll() {
-        Vector lista = new Vector();
-        ResultSet rs;
+    public ResultSet getAll() {
+        
+        ResultSet rs=null;
         try {
 
             rs = this.stm.executeQuery("SELECT * FROM pessoas ORDER BY idade");
 
-            while (rs.next()) {
-                Object[] values = new Object[rs.getMetaData().getColumnCount()];
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    values[i - 1] = rs.getObject(i);
-                }
-                lista.add(values);
-            }
-
+        
         } catch (SQLException ex) {
             Logger.getLogger(PessoaGateway.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;
+        return rs;
     }
 
 }

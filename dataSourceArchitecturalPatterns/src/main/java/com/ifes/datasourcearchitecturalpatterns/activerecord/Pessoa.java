@@ -54,8 +54,8 @@ public class Pessoa {
         //Init db
         try {
 //Remove e cria a tabela a cada execução. Mero exemplo
-            this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
-            this.stm.executeUpdate("CREATE TABLE pessoas ("
+//            this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
+            this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "nome varchar(70) PRIMARY KEY NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {
@@ -123,8 +123,8 @@ public class Pessoa {
         try {
 //Remove e cria a tabela a cada execução. Mero exemplo
             Statement stm=conn.createStatement();
-            stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
-            stm.executeUpdate("CREATE TABLE pessoas ("
+//            stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
+            stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "nome varchar(70) PRIMARY KEY NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {

@@ -7,8 +7,8 @@ package com.ifes.datasourcearchitecturalpatterns.tabledatagateway;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,16 +19,17 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-        
+
         try {
-            
+
             Connection conn;
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:pessoas.db");
             
+             conn = DriverManager.getConnection("jdbc:sqlite:pessoas.db");
+           conn.createStatement().executeUpdate("DROP TABLE IF EXISTS pessoas");
+
             PessoaGateway pg = new PessoaGateway(conn);
-            
-            
+
             pg.insert("Jonnas", 19);
             pg.insert("Fulano", 20);
             pg.insert("Beltrano", 10);
@@ -39,22 +40,27 @@ public class Main {
             pg.removePessoa("Fulano");
 
             Main.listaTodos(pg);
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+
     }
 
-    public static void listaTodos(PessoaGateway pg) {
-        Iterator it = pg.getAll().iterator();
-        Object[] ps;
-        while (it.hasNext()) {
-            ps = (Object[]) it.next();
-            System.out.println("Nome:" + (String)ps[0]);
-            System.out.println("Idade:" + (int)ps[1] + "\n");
+    public static void listaTodos(PessoaGateway pg) throws SQLException {
+        ResultSet rs = pg.getAll();
+        if (rs != null) {
+            while (rs.next()) {
+                System.out.println("Nome:" + rs.getString("nome"));
+                System.out.println("Idade:" + rs.getString("idade") + "\n");
+            }
+            rs.close();
+            
         }
+
     }
 
 }

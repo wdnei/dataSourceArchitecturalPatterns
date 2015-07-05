@@ -24,14 +24,18 @@ public class Main {
             Connection conn;
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:pessoas.db");
-
-            PessoaFinder pf = new PessoaFinder(conn);
+           conn.createStatement().executeUpdate("DROP TABLE IF EXISTS pessoas");
             
-            PessoaGateway psJonnas=new PessoaGateway(conn);
+            
+            PessoaFinder pf = new PessoaFinder(conn);
+
+            //add pessoa
+            PessoaGateway psJonnas = new PessoaGateway(conn);
             psJonnas.setIdade(19);
             psJonnas.setNome("Jonnas");
             psJonnas.insert();
-            
+
+            //Procurar por pessoa
             PessoaGateway ps = pf.find("Jonnas");
 
             if (ps != null) {

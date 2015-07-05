@@ -5,7 +5,6 @@
  */
 package com.ifes.datasourcearchitecturalpatterns.activerecord;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,15 +24,14 @@ public class Main {
             Connection conn;
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:pessoas.db");
+            conn.createStatement().executeUpdate("DROP TABLE IF EXISTS pessoas");
 
-            
-            
-            Pessoa psJonnas=new Pessoa(conn);
+            Pessoa psJonnas = new Pessoa(conn);
             psJonnas.setIdade(19);
             psJonnas.setNome("Jonnas");
             psJonnas.insert();
-            
-            Pessoa ps = Pessoa.find(conn,"Jonnas");
+
+            Pessoa ps = Pessoa.find(conn, "Jonnas");
 
             if (ps != null) {
                 System.out.println("Nome:" + ps.getNome());

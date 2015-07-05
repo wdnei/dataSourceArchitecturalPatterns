@@ -5,12 +5,10 @@
  */
 package rowtablegateway;
 
-import com.ifes.datasourcearchitecturalpatterns.Pessoa;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
 
 /**
  *
@@ -29,8 +27,8 @@ public class PessoaFinder {
        //Init db
         try {
 //Remove e cria a tabela a cada execução. Mero exemplo
-            this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
-            this.stm.executeUpdate("CREATE TABLE pessoas ("
+            //this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
+            this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "nome varchar(70) PRIMARY KEY NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {
@@ -44,12 +42,13 @@ public class PessoaFinder {
         PessoaGateway ps=null;
         ResultSet rs;
         try {
-            rs = this.stm.executeQuery("SELECT * FROM pessoas WHERE nome=\"" +nome+"\"");
+            System.out.println(nome);
+            rs = this.stm.executeQuery("SELECT * FROM pessoas WHERE nome='" +nome+"'");
 
             while (rs.next()) {
                 ps=new PessoaGateway(conn);
                 ps.setNome(rs.getString("nome"));
-                ps.setIdade(rs.getInt("idade"));
+                ps.setIdade(rs.getInt("idade"));                
             }
             rs.close();
 

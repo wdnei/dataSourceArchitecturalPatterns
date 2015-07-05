@@ -47,8 +47,8 @@ public class PessoaGateway {
         //Init db
         try {
 //Remove e cria a tabela a cada execução. Mero exemplo
-            this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
-            this.stm.executeUpdate("CREATE TABLE pessoas ("
+//            this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
+            this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "nome varchar(70) PRIMARY KEY NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {
@@ -62,6 +62,7 @@ public class PessoaGateway {
             this.stm.executeUpdate("INSERT INTO pessoas VALUES (\""
                     + nome + "\","
                     + idade + ")");
+            System.out.println("inseriu:"+nome);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,11 +77,11 @@ public class PessoaGateway {
         }
     }
 
-    public static PessoaGateway load(ResultSet rs, Connection conn)  {
+    public static PessoaGateway load(ResultSet rs )  {
 
         PessoaGateway pessoa = null;
         try {
-            pessoa = new PessoaGateway(conn);
+            pessoa = new PessoaGateway(rs.getStatement().getConnection());
 
             pessoa.nome = rs.getString("nome");
             pessoa.idade = rs.getInt("idade");
