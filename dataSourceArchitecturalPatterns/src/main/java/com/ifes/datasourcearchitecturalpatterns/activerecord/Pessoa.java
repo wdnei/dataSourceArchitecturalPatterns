@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Classe Implementa o padrão de acesso a dados  Active Record
  * @author admindev
  */
 public class Pessoa {

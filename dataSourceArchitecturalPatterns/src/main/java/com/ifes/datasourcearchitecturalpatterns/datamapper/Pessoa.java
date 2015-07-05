@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- *
+ *Classe Implementa o padrão de acesso a dados Dat Wrapper
  * @author admindev
  */
 @Entity

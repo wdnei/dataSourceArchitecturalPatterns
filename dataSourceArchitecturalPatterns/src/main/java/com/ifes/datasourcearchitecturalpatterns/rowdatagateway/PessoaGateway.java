@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Classe Implementa o padrão de acesso a dados Row Data Gateway
  * @author admindev
  */
 public class PessoaGateway {

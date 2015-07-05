@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ *Classe Implementa o padrão de acesso a dados Row Data Gateway
  * @author admindev
  */
 public class PessoaFinder {
