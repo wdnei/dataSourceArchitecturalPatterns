@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rowtablegateway;
+package com.ifes.datasourcearchitecturalpatterns.rowdatagateway;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,47 +15,42 @@ import java.sql.Statement;
  * @author admindev
  */
 public class PessoaFinder {
-    
+
     private Connection conn;
     private Statement stm;
-    
-    
+
     public PessoaFinder(Connection conn) throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        this.conn=conn;
+        this.conn = conn;
         this.stm = this.conn.createStatement();
-       //Init db
+        //Init db
         try {
 //Remove e cria a tabela a cada execução. Mero exemplo
             //this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
             this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
-                    + "nome varchar(70) PRIMARY KEY NOT NULL,"
+                    + "id integer PRIMARY KEY NOT NULL,"
+                    + "nome varchar(70) NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    
-    public PessoaGateway find(String nome) throws ClassNotFoundException
-    {
-        PessoaGateway ps=null;
+    public PessoaGateway find(String nome) throws ClassNotFoundException, SQLException {
+        PessoaGateway ps = null;
         ResultSet rs;
-        try {
-            System.out.println(nome);
-            rs = this.stm.executeQuery("SELECT * FROM pessoas WHERE nome='" +nome+"'");
 
-            while (rs.next()) {
-                ps=new PessoaGateway(conn);
-                ps.setNome(rs.getString("nome"));
-                ps.setIdade(rs.getInt("idade"));                
-            }
-            rs.close();
+        System.out.println(nome);
+        rs = this.stm.executeQuery("SELECT * FROM pessoas WHERE nome='" + nome + "'");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        while (rs.next()) {
+
+            ps = PessoaGateway.load(rs);
+
         }
+        rs.close();
+
         return ps;
     }
-    
+
 }

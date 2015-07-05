@@ -30,14 +30,14 @@ public class Main {
 
             PessoaGateway pg = new PessoaGateway(conn);
 
-            pg.insert("Jonnas", 19);
-            pg.insert("Fulano", 20);
-            pg.insert("Beltrano", 10);
+            pg.insert(1,"Jonnas", 19);
+            pg.insert(2,"Fulano", 20);
+            pg.insert(3,"Beltrano", 10);
 
             Main.listaTodos(pg);
 
             System.out.println("Removemos a pessoa com o nome Fulano e listamos novamente");
-            pg.removePessoa("Fulano");
+            pg.delete(2);
 
             Main.listaTodos(pg);
             

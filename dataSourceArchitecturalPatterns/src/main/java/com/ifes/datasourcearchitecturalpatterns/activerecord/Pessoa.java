@@ -22,8 +22,18 @@ public class Pessoa {
     private Connection conn;
     private Statement stm;
 
+    private Integer id;
     private int idade;
     private String nome;
+    
+    
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return this.nome;
@@ -56,7 +66,8 @@ public class Pessoa {
 //Remove e cria a tabela a cada execução. Mero exemplo
 //            this.stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
             this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
-                    + "nome varchar(70) PRIMARY KEY NOT NULL,"
+                    + "id integer PRIMARY KEY NOT NULL,"
+                    + "nome varchar(70) NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,18 +77,31 @@ public class Pessoa {
     public void insert() {
         try {
             this.stm = this.conn.createStatement();
-            this.stm.executeUpdate("INSERT INTO pessoas VALUES (\""
+            this.stm.executeUpdate("INSERT INTO pessoas VALUES ("
+                    + id + ",\""
                     + nome + "\","
                     + idade + ")");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-    public void removePessoa() {
+    
+    public void update() {
         try {
             this.stm = this.conn.createStatement();
-            this.stm.executeUpdate("DELETE FROM pessoas WHERE nome = \"" + nome + "\"");
+            
+            this.stm.executeUpdate("UPDATE pessoas"+
+"SET nome=\""+nome+"\",idade="+idade+""+
+"WHERE id=\""+id+"\"");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete() {
+        try {
+            this.stm = this.conn.createStatement();
+            this.stm.executeUpdate("DELETE FROM pessoas WHERE id = " + id + "");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -89,6 +113,7 @@ public class Pessoa {
         try {
             pessoa = new Pessoa(conn);
 
+            pessoa.id=rs.getInt("id");
             pessoa.nome = rs.getString("nome");
             pessoa.idade = rs.getInt("idade");
 
@@ -109,6 +134,7 @@ public class Pessoa {
 
             while (rs.next()) {
                 ps=new Pessoa(conn);
+                ps.setId(rs.getInt("id"));
                 ps.setNome(rs.getString("nome"));
                 ps.setIdade(rs.getInt("idade"));
             }
@@ -125,7 +151,8 @@ public class Pessoa {
             Statement stm=conn.createStatement();
 //            stm.executeUpdate("DROP TABLE IF EXISTS pessoas");
             stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
-                    + "nome varchar(70) PRIMARY KEY NOT NULL,"
+                    + "id integer PRIMARY KEY NOT NULL,"
+                    + "nome varchar(70) NOT NULL,"
                     + "idade integer);");
         } catch (SQLException e) {
             e.printStackTrace();

@@ -27,6 +27,7 @@ public class Main {
             conn.createStatement().executeUpdate("DROP TABLE IF EXISTS pessoas");
 
             Pessoa psJonnas = new Pessoa(conn);
+            psJonnas.setId(1);
             psJonnas.setIdade(19);
             psJonnas.setNome("Jonnas");
             psJonnas.insert();
@@ -34,6 +35,7 @@ public class Main {
             Pessoa ps = Pessoa.find(conn, "Jonnas");
 
             if (ps != null) {
+                System.out.println("id:" + ps.getId());
                 System.out.println("Nome:" + ps.getNome());
                 System.out.println("Idade:" + ps.getIdade() + "n");
 
