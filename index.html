@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Source Architectural Patterns by wdnei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Data Source Architectural Patterns</h1>
+      <h2 class="project-tagline">Este projeto foi criado a partir de uma apresentação sobre Data Source Architectural Patterns na disciplina de Laboratório de Engenharia de Software.</h2>
+      <a href="https://github.com/wdnei/dataSourceArchitecturalPatterns" class="btn">View on GitHub</a>
+      <a href="https://github.com/wdnei/dataSourceArchitecturalPatterns/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/wdnei/dataSourceArchitecturalPatterns/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <hr>
+
+<h3>
+<a id="criado-por-wdnei-paixão" class="anchor" href="#criado-por-wdnei-paix%C3%A3o" aria-hidden="true"><span class="octicon octicon-link"></span></a>criado por Wdnei Paixão</h3>
+
+<hr>
+
+<h2>
+<a id="introdução" class="anchor" href="#introdu%C3%A7%C3%A3o" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introdução</h2>
+
+<p>O coração de todo aplicativo é o acesso a dados. Desenvolvedores passam muito de seu tempo projetando, avaliando, testando e se preocupando com as formas de acesso a dados em seus sistemas. Assim, é eminente o surgimento de padrões comuns para escrever código da camada de acesso a dados.</p>
+
+<p>O padrões de acesso a dados apresentados aqui foram definidos por Martin Fowler, são eles:</p>
+
+<p>*Table Data Gateway
+*Row Data Gateway
+*Active Record
+*Data Wrapper</p>
+
+<h2>
+<a id="table-data-gateway" class="anchor" href="#table-data-gateway" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table Data Gateway</h2>
+
+<p><img src="https://raw.githubusercontent.com/wdnei/dataSourceArchitecturalPatterns/master/dataSourceArchitecturalPatterns/UMLDiagrams/Images/TableDataGateway.png" alt="Exemplo Table Data Gateway"></p>
+
+<p>Este Padrão é também denominado como Data Access Object(DAO)
+Um objeto que age como um Gateway(Ponte/Porta de Entrada) as tabelas do banco de dados.
+Table Data Gateway inclui todos comando SQL para acessar uma única tabela ou view: selects, inserts, updates, and deletes.
+As propriedades são implementadas de acordo com a necessidade. </p>
+
+<h3>
+<a id="porque-usar" class="anchor" href="#porque-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque usar:</h3>
+
+<p>-Encapsular os comando SQL e manter o acesso ao banco mais transparente
+-Evitar repetição de codigo</p>
+
+<h3>
+<a id="quando-usar" class="anchor" href="#quando-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quando Usar:</h3>
+
+<p>-Table Data Gateway trabalha perfeitamente com Table Module, onde produz um DataSet para trabalhar com as tabelas do banco em memória.
+-Quando há o uso de Transaction Script.</p>
+
+<h2>
+<a id="row-data-gateway" class="anchor" href="#row-data-gateway" aria-hidden="true"><span class="octicon octicon-link"></span></a>Row Data Gateway</h2>
+
+<p><img src="https://raw.githubusercontent.com/wdnei/dataSourceArchitecturalPatterns/master/dataSourceArchitecturalPatterns/UMLDiagrams/Images/RowDataGateway.png" alt="Exemplo Row Data Gateway"></p>
+
+<p>Row Data Gateway representa objetos exatamente como as linhas das tabelas do banco de dados , mas que podem ser acessados por mecanismos em linguagens de programação. Todos os detalhes de acesso ao banco são escondidas usando interfaces. 
+Problema com múltiplas instancias do mesmo registro. Necessita implementar todas as propriedades de acesso.</p>
+
+<h3>
+<a id="porque-usar-1" class="anchor" href="#porque-usar-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque usar:</h3>
+
+<p>-Evitar repetição de código.
+-Quando não há o uso de classes de domínio.</p>
+
+<h3>
+<a id="quando-usar-1" class="anchor" href="#quando-usar-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quando Usar:</h3>
+
+<p>-Quando há o uso de Transaction Scripts.</p>
+
+<h2>
+<a id="active-record" class="anchor" href="#active-record" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active Record</h2>
+
+<p><img src="https://raw.githubusercontent.com/wdnei/dataSourceArchitecturalPatterns/master/dataSourceArchitecturalPatterns/UMLDiagrams/Images/ActiveRecord.png" alt="Exemplo Active Record"></p>
+
+<p>Uma classe contem as propriedades da tabela, encapsula o código de acesso(SQL) ao banco de dados, e também contém a lógica de negócio, ou seja, um objeto contém ambos dados e comportamento. Entretanto, há problemas com múltiplas instancias do mesmo registro.</p>
+
+<h3>
+<a id="porquequando-usar" class="anchor" href="#porquequando-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque/Quando Usar:</h3>
+
+<p>-Boa escolha quando há o uso de Domain Model
+-Quando há a necessidade de mesclar acesso a dados e a lógica de negócio
+-Quando não há muita complexidade: herança, relação entre objetos.</p>
+
+<h2>
+<a id="data-wrapper" class="anchor" href="#data-wrapper" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Wrapper</h2>
+
+<p><img src="https://raw.githubusercontent.com/wdnei/dataSourceArchitecturalPatterns/master/dataSourceArchitecturalPatterns/UMLDiagrams/Images/DataMapper.png" alt="Exemplo Data Mapper"></p>
+
+<p>Uma camada que mapeia e move dados entre objetos e banco de dados, os mantendo independentes. Busca um registro no banco de dados e cria um objeto com as propriedades preenchidas. Onde há o isolamento do acesso ao banco de dados e da lógica de négocio. Podendo usar Lazy Load para resolver relacionamento de dados.</p>
+
+<h3>
+<a id="abordagens-de-implementação" class="anchor" href="#abordagens-de-implementa%C3%A7%C3%A3o" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abordagens de implementação:</h3>
+
+<p>-Uso de ferramentas para criar classes a partir do mapeamento do banco.
+-Uso de Metadata e Reflection </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/wdnei/dataSourceArchitecturalPatterns">Data Source Architectural Patterns</a> is maintained by <a href="https://github.com/wdnei">wdnei</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
