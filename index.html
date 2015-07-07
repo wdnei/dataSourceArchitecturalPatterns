@@ -33,10 +33,13 @@
 
 <p>O padrões de acesso a dados apresentados aqui foram definidos por Martin Fowler, são eles:</p>
 
-<p>*Table Data Gateway
-*Row Data Gateway
-*Active Record
-*Data Wrapper</p>
+<p>*Table Data Gateway</p>
+
+<p>*Row Data Gateway</p>
+
+<p>*Active Record</p>
+
+<p>*Data Wrapper</p>
 
 <h2>
 <a id="table-data-gateway" class="anchor" href="#table-data-gateway" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table Data Gateway</h2>
@@ -51,14 +54,16 @@ As propriedades são implementadas de acordo com a necessidade. </p>
 <h3>
 <a id="porque-usar" class="anchor" href="#porque-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque usar:</h3>
 
-<p>-Encapsular os comando SQL e manter o acesso ao banco mais transparente
--Evitar repetição de codigo</p>
+<p>-Encapsular os comando SQL e manter o acesso ao banco mais transparente</p>
+
+<p>-Evitar repetição de codigo</p>
 
 <h3>
 <a id="quando-usar" class="anchor" href="#quando-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quando Usar:</h3>
 
-<p>-Table Data Gateway trabalha perfeitamente com Table Module, onde produz um DataSet para trabalhar com as tabelas do banco em memória.
--Quando há o uso de Transaction Script.</p>
+<p>-Table Data Gateway trabalha perfeitamente com Table Module, onde produz um DataSet para trabalhar com as tabelas do banco em memória.</p>
+
+<p>-Quando há o uso de Transaction Script.</p>
 
 <h2>
 <a id="row-data-gateway" class="anchor" href="#row-data-gateway" aria-hidden="true"><span class="octicon octicon-link"></span></a>Row Data Gateway</h2>
@@ -71,8 +76,9 @@ Problema com múltiplas instancias do mesmo registro. Necessita implementar toda
 <h3>
 <a id="porque-usar-1" class="anchor" href="#porque-usar-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque usar:</h3>
 
-<p>-Evitar repetição de código.
--Quando não há o uso de classes de domínio.</p>
+<p>-Evitar repetição de código.</p>
+
+<p>-Quando não há o uso de classes de domínio.</p>
 
 <h3>
 <a id="quando-usar-1" class="anchor" href="#quando-usar-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quando Usar:</h3>
@@ -89,9 +95,11 @@ Problema com múltiplas instancias do mesmo registro. Necessita implementar toda
 <h3>
 <a id="porquequando-usar" class="anchor" href="#porquequando-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque/Quando Usar:</h3>
 
-<p>-Boa escolha quando há o uso de Domain Model
--Quando há a necessidade de mesclar acesso a dados e a lógica de negócio
--Quando não há muita complexidade: herança, relação entre objetos.</p>
+<p>-Boa escolha quando há o uso de Domain Model</p>
+
+<p>-Quando há a necessidade de mesclar acesso a dados e a lógica de negócio</p>
+
+<p>-Quando não há muita complexidade: herança, relação entre objetos.</p>
 
 <h2>
 <a id="data-wrapper" class="anchor" href="#data-wrapper" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Wrapper</h2>
@@ -103,8 +111,9 @@ Problema com múltiplas instancias do mesmo registro. Necessita implementar toda
 <h3>
 <a id="abordagens-de-implementação" class="anchor" href="#abordagens-de-implementa%C3%A7%C3%A3o" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abordagens de implementação:</h3>
 
-<p>-Uso de ferramentas para criar classes a partir do mapeamento do banco.
--Uso de Metadata e Reflection </p>
+<p>-Uso de ferramentas para criar classes a partir do mapeamento do banco.</p>
+
+<p>-Uso de Metadata e Reflection </p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/wdnei/dataSourceArchitecturalPatterns">Data Source Architectural Patterns</a> is maintained by <a href="https://github.com/wdnei">wdnei</a>.</span>
