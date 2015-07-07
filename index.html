@@ -46,10 +46,7 @@
 
 <p><img src="https://raw.githubusercontent.com/wdnei/dataSourceArchitecturalPatterns/master/dataSourceArchitecturalPatterns/UMLDiagrams/Images/TableDataGateway.png" alt="Exemplo Table Data Gateway"></p>
 
-<p>Este Padrão é também denominado como Data Access Object(DAO)
-Um objeto que age como um Gateway(Ponte/Porta de Entrada) as tabelas do banco de dados.
-Table Data Gateway inclui todos comando SQL para acessar uma única tabela ou view: selects, inserts, updates, and deletes.
-As propriedades são implementadas de acordo com a necessidade. </p>
+<p>Este Padrão é também denominado como Data Access Object(DAO). Um objeto que age como um Gateway(Ponte/Porta de Entrada) as tabelas do banco de dados. Table Data Gateway inclui todos comando SQL para acessar uma única tabela ou view: selects, inserts, updates, and deletes. Onde, as propriedades são implementadas de acordo com a necessidade. </p>
 
 <h3>
 <a id="porque-usar" class="anchor" href="#porque-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque usar:</h3>
@@ -71,7 +68,7 @@ As propriedades são implementadas de acordo com a necessidade. </p>
 <p><img src="https://raw.githubusercontent.com/wdnei/dataSourceArchitecturalPatterns/master/dataSourceArchitecturalPatterns/UMLDiagrams/Images/RowDataGateway.png" alt="Exemplo Row Data Gateway"></p>
 
 <p>Row Data Gateway representa objetos exatamente como as linhas das tabelas do banco de dados , mas que podem ser acessados por mecanismos em linguagens de programação. Todos os detalhes de acesso ao banco são escondidas usando interfaces. 
-Problema com múltiplas instancias do mesmo registro. Necessita implementar todas as propriedades de acesso.</p>
+Entretanto há problema com múltiplas instancias do mesmo registro. Além disso, necessita implementar todas as propriedades de acesso.</p>
 
 <h3>
 <a id="porque-usar-1" class="anchor" href="#porque-usar-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque usar:</h3>
@@ -90,7 +87,7 @@ Problema com múltiplas instancias do mesmo registro. Necessita implementar toda
 
 <p><img src="https://raw.githubusercontent.com/wdnei/dataSourceArchitecturalPatterns/master/dataSourceArchitecturalPatterns/UMLDiagrams/Images/ActiveRecord.png" alt="Exemplo Active Record"></p>
 
-<p>Uma classe contem as propriedades da tabela, encapsula o código de acesso(SQL) ao banco de dados, e também contém a lógica de negócio, ou seja, um objeto contém ambos dados e comportamento. Entretanto, há problemas com múltiplas instancias do mesmo registro.</p>
+<p>Uma classe contem as propriedades da tabela, encapsula o código de acesso(SQL) ao banco de dados, e também contém a lógica de negócio, ou seja, um objeto contém ambos dados e comportamento.Similar ao Row Data Gateway, mas com adição da lógica de negócios. Além disso, há problemas com múltiplas instancias do mesmo registro e herança de objetos.</p>
 
 <h3>
 <a id="porquequando-usar" class="anchor" href="#porquequando-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Porque/Quando Usar:</h3>
