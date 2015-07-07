@@ -23,7 +23,8 @@ public class Pessoa {
     private Statement stm;
 
     private Integer id;
-    private int idade;
+    private Integer idade;
+    private Integer dependentes;
     private String nome;
     
     
@@ -42,19 +43,41 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public int getIdade() {
-        return this.idade;
+    
+    /**
+     * @return the idade
+     */
+    public Integer getIdade() {
+        return idade;
     }
 
-    public void setIdade(int idade) {
+    /**
+     * @param idade the idade to set
+     */
+    public void setIdade(Integer idade) {
         this.idade = idade;
     }
-    
-    public boolean podeSerPreso()
-    {
-        return this.idade>18;
+
+    /**
+     * @return the dependentes
+     */
+    public Integer getDependentes() {
+        return dependentes;
     }
+
+    /**
+     * @param dependentes the dependentes to set
+     */
+    public void setDependentes(Integer dependentes) {
+        this.dependentes = dependentes;
+    }
+    
+    public boolean recebeAdicionalPorFilhos()
+    {
+        return dependentes>0;
+    }
+
+    
     
 
     public Pessoa(Connection conn) throws SQLException, ClassNotFoundException {
@@ -68,7 +91,8 @@ public class Pessoa {
             this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "id integer PRIMARY KEY NOT NULL,"
                     + "nome varchar(70) NOT NULL,"
-                    + "idade integer);");
+                    + "idade integer,"
+                    + "dependentes integer);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,9 +102,10 @@ public class Pessoa {
         try {
             this.stm = this.conn.createStatement();
             this.stm.executeUpdate("INSERT INTO pessoas VALUES ("
-                    + id + ",\""
-                    + nome + "\","
-                    + idade + ")");
+                + id + ",\""
+                + nome + "\","
+                +getIdade()+","
+                + getDependentes() + ")");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,9 +115,9 @@ public class Pessoa {
         try {
             this.stm = this.conn.createStatement();
             
-            this.stm.executeUpdate("UPDATE pessoas"+
-"SET nome=\""+nome+"\",idade="+idade+""+
-"WHERE id=\""+id+"\"");
+            this.stm.executeUpdate("UPDATE pessoas"
+                + "SET nome=\"" + nome + "\",idade=" + idade + ",dependentes="+dependentes
+                + " WHERE id=" + id + "");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,15 +132,17 @@ public class Pessoa {
         }
     }
 
-    public static Pessoa load(ResultSet rs, Connection conn)  {
+    public static Pessoa load(ResultSet rs)  {
 
         Pessoa pessoa = null;
         try {
-            pessoa = new Pessoa(conn);
+            pessoa = new Pessoa(rs.getStatement().getConnection());
 
             pessoa.id=rs.getInt("id");
             pessoa.nome = rs.getString("nome");
-            pessoa.idade = rs.getInt("idade");
+            pessoa.setIdade((Integer) rs.getInt("idade"));
+            pessoa.setDependentes(rs.getInt("dependentes"));
+            
 
             
         } catch (Exception ex) {
@@ -137,6 +164,7 @@ public class Pessoa {
                 ps.setId(rs.getInt("id"));
                 ps.setNome(rs.getString("nome"));
                 ps.setIdade(rs.getInt("idade"));
+                ps.setDependentes(rs.getInt("depenpentes"));
             }
             rs.close();
 
@@ -158,5 +186,7 @@ public class Pessoa {
             e.printStackTrace();
         }
     }
+
+    
 
 }

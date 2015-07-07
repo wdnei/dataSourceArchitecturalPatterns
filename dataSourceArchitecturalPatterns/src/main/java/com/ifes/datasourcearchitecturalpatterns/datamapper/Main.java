@@ -48,8 +48,8 @@ public class Main {
 			tx = session.beginTransaction();
 			
 			// Creating pessoa entity that will be save to the sqlite database
-			Pessoa ps1 = new Pessoa(3, "My Name", 19);
-			Pessoa ps2 = new Pessoa(24, "Your Name", 20);
+			Pessoa ps1 = new Pessoa(3, "My Name", 19,0);
+			Pessoa ps2 = new Pessoa(24, "Your Name", 20,1);
 			
 			// Saving to the database
 			session.save(ps1);

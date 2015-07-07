@@ -19,6 +19,7 @@ public class Pessoa {
 
     private Integer id;
     private Integer idade;
+    private Integer dependentes;
     private String nome;
 
     @Id
@@ -45,15 +46,32 @@ public class Pessoa {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+    
+    /**
+     * @return the dependentes
+     */
+    public Integer getDependentes() {
+        return dependentes;
+    }
+
+    /**
+     * @param dependentes the dependentes to set
+     */
+    public void setDependentes(Integer dependentes) {
+        this.dependentes = dependentes;
+    }
 
     public boolean podeSerPreso() {
         return this.idade > 18;
     }
 
-    public Pessoa(Integer id,String nome, Integer idade) {
+    public Pessoa(Integer id,String nome, Integer idade,Integer dependentes) {
         this.nome = nome;
         this.idade = idade;
         this.id=id;
+        this.dependentes=dependentes;
     }
+
+    
 
 }

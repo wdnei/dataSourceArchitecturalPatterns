@@ -23,10 +23,11 @@ public class PessoaGateway {
 
     private Integer id;
     private int idade;
+    private Integer dependentes;
     private String nome;
 
-    public boolean inserted;
-    public boolean deleted;
+    private boolean inserted;
+    private boolean deleted;
 
     public Integer getId() {
         return this.id;
@@ -51,6 +52,21 @@ public class PessoaGateway {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+    
+    
+    /**
+     * @return the dependentes
+     */
+    public Integer getDependentes() {
+        return dependentes;
+    }
+
+    /**
+     * @param dependentes the dependentes to set
+     */
+    public void setDependentes(Integer dependentes) {
+        this.dependentes = dependentes;
+    }
 
     public PessoaGateway(Connection conn) throws SQLException, ClassNotFoundException {
         inserted = false;
@@ -65,7 +81,8 @@ public class PessoaGateway {
             this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "id integer PRIMARY KEY NOT NULL,"
                     + "nome varchar(70) NOT NULL,"
-                    + "idade integer);");
+                    + "idade integer,"
+                    + "dependentes integer);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,7 +93,8 @@ public class PessoaGateway {
         this.stm.executeUpdate("INSERT INTO pessoas VALUES ("
                 + id + ",\""
                 + nome + "\","
-                + idade + ")");
+                +idade+","
+                + dependentes + ")");
         inserted = true;
     }
 
@@ -84,14 +102,15 @@ public class PessoaGateway {
         this.stm = this.conn.createStatement();
 
         this.stm.executeUpdate("UPDATE pessoas"
-                + "SET nome=\"" + nome + "\",idade=" + idade + ""
-                + "WHERE id=" + id + "");
+                + "SET nome=\"" + nome + "\",idade=" + idade + ",dependentes="+dependentes
+                + " WHERE id=" + id + "");
     }
 
     public void delete() throws SQLException {
         this.stm = this.conn.createStatement();
         this.stm.executeUpdate("DELETE FROM pessoas WHERE id = " + id + "");
         deleted = true;
+        inserted=false;
     }
 
     public static PessoaGateway load(ResultSet rs) throws SQLException, ClassNotFoundException {
@@ -103,8 +122,24 @@ public class PessoaGateway {
         pessoa.id = rs.getInt("id");
         pessoa.nome = rs.getString("nome");
         pessoa.idade = rs.getInt("idade");
+        pessoa.dependentes=rs.getInt("dependentes");
 
         return pessoa;
     }
+
+    /**
+     * @return the inserted
+     */
+    public boolean isInserted() {
+        return inserted;
+    }
+
+    /**
+     * @return the deleted
+     */
+    public boolean isDeleted() {
+        return deleted;
+    }
+
 
 }

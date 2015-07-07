@@ -29,7 +29,8 @@ public class PessoaGateway {
             this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "id integer PRIMARY KEY NOT NULL,"
                     + "nome varchar(70) NOT NULL,"
-                    + "idade integer);");
+                    + "idade integer,"
+                    + "dependentes integer);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,19 +43,21 @@ public class PessoaGateway {
             this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "id integer PRIMARY KEY NOT NULL,"
                     + "nome varchar(70) NOT NULL,"
-                    + "idade integer);");
+                    + "idade integer,"
+                    + "dependentes integer);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void insert(int id, String nome, int idade) throws SQLException {
+    public void insert(int id, String nome, int idade,int dependentes) throws SQLException {
 
         this.stm = this.conn.createStatement();
         this.stm.executeUpdate("INSERT INTO pessoas VALUES ("
                 + id + ",\""
                 + nome + "\","
-                + idade + ")");
+                +idade+","
+                + dependentes + ")");
 
     }
 
@@ -65,13 +68,13 @@ public class PessoaGateway {
 
     }
 
-    public void update(int id, String nome, int idade) throws SQLException {
+    public void update(int id, String nome, int idade, int dependentes) throws SQLException {
 
         this.stm = this.conn.createStatement();
 
         this.stm.executeUpdate("UPDATE pessoas"
-                + "SET nome=\"" + nome + "\",idade=" + idade + ""
-                + "WHERE id=" + id + "");
+                + "SET nome=\"" + nome + "\",idade=" + idade + ",dependentes="+dependentes
+                + " WHERE id=" + id + "");
 
     }
 

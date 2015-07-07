@@ -30,9 +30,9 @@ public class Main {
 
             PessoaGateway pg = new PessoaGateway(conn);
 
-            pg.insert(1,"Jonnas", 19);
-            pg.insert(2,"Fulano", 20);
-            pg.insert(3,"Beltrano", 10);
+            pg.insert(1,"Jonnas", 19,0);
+            pg.insert(2,"Fulano", 20,1);
+            pg.insert(3,"Beltrano", 10,2);
 
             Main.listaTodos(pg);
 

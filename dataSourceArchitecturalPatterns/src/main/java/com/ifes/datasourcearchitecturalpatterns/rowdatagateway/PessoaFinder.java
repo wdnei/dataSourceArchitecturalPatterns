@@ -30,7 +30,8 @@ public class PessoaFinder {
             this.stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "id integer PRIMARY KEY NOT NULL,"
                     + "nome varchar(70) NOT NULL,"
-                    + "idade integer);");
+                    + "idade integer,"
+                    + "dependentes integer);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
