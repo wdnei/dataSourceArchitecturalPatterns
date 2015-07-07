@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="PessoaGateway">
+  <ClassDiagramComponents>
+    <Class name="PessoaGateway" package="com.ifes.datasourcearchitecturalpatterns.tabledatagateway" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Connection" name="conn"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initDB" returnType="void" visibility="public"/>
+        <Method name="insert" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="idade"/>
+          <Argument type="int" name="dependentes"/>
+        </Method>
+        <Method name="delete" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="idade"/>
+          <Argument type="int" name="dependentes"/>
+        </Method>
+        <Method name="getAll" returnType="ResultSet" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="PessoaFinder" package="com.ifes.datasourcearchitecturalpatterns.rowdatagateway" visibility="public" xPosition="39.0" yPosition="144.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Connection" name="conn"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="find" returnType="PessoaGateway" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PessoaGateway" package="com.ifes.datasourcearchitecturalpatterns.rowdatagateway" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="conn" type="Connection" visibility="private"/>
+        <Field name="stm" type="Statement" visibility="private"/>
+        <Field name="id" type="Integer" visibility="private"/>
+        <Field name="idade" type="int" visibility="private"/>
+        <Field name="dependentes" type="Integer" visibility="private"/>
+        <Field name="nome" type="String" visibility="private"/>
+        <Field name="inserted" type="boolean" visibility="private"/>
+        <Field name="deleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Connection" name="conn"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="insert" returnType="void" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="delete" returnType="void" visibility="public"/>
+        <Method name="load" returnType="PessoaGateway" visibility="public" isStatic="true">
+          <Argument type="ResultSet" name="rs"/>
+        </Method>
+        <Method name="isInserted" returnType="boolean" visibility="public"/>
+        <Method name="isDeleted" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="com.ifes.datasourcearchitecturalpatterns.rowdatagateway.PessoaFinder" target="com.ifes.datasourcearchitecturalpatterns.rowdatagateway.PessoaGateway" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.ifes.datasourcearchitecturalpatterns.rowdatagateway.PessoaGateway" target="com.ifes.datasourcearchitecturalpatterns.rowdatagateway.PessoaGateway" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

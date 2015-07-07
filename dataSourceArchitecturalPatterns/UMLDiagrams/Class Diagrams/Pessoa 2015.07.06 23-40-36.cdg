@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Pessoa">
+  <ClassDiagramComponents>
+    <Class name="Pessoa" package="com.ifes.datasourcearchitecturalpatterns.activerecord" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="id" type="Integer" visibility="private"/>
+        <Field name="idade" type="Integer" visibility="private"/>
+        <Field name="dependentes" type="Integer" visibility="private"/>
+        <Field name="nome" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="recebeAdicionalPorFilhos" returnType="boolean" visibility="public"/>
+        <Method name="insert" returnType="void" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="delete" returnType="void" visibility="public"/>
+        <Method name="load" returnType="Pessoa" visibility="public" isStatic="true">
+          <Argument type="ResultSet" name="rs"/>
+        </Method>
+        <Method name="find" returnType="Pessoa" visibility="public" isStatic="true" isFinal="true">
+          <Argument type="Connection" name="conn"/>
+          <Argument type="String" name="nome"/>
+        </Method>
+        <Method name="initDB" returnType="void" visibility="private" isStatic="true" isFinal="true">
+          <Argument type="Connection" name="conn"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="com.ifes.datasourcearchitecturalpatterns.activerecord.Pessoa" target="com.ifes.datasourcearchitecturalpatterns.activerecord.Pessoa" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
