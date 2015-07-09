@@ -164,7 +164,7 @@ public class Pessoa {
                 ps.setId(rs.getInt("id"));
                 ps.setNome(rs.getString("nome"));
                 ps.setIdade(rs.getInt("idade"));
-                ps.setDependentes(rs.getInt("depenpentes"));
+                ps.setDependentes(rs.getInt("dependentes"));
             }
             rs.close();
 
@@ -181,7 +181,8 @@ public class Pessoa {
             stm.executeUpdate("CREATE TABLE IF NOT EXISTS pessoas ("
                     + "id integer PRIMARY KEY NOT NULL,"
                     + "nome varchar(70) NOT NULL,"
-                    + "idade integer);");
+                    + "idade integer,"
+                    + "dependentes integer);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
